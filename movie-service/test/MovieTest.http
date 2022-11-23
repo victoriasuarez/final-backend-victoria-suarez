@@ -1,0 +1,21 @@
+POST http://localhost:8080/movies/save
+Content-Type: application/json
+
+{
+  "movieId": 12,
+  "name": "transformer",
+  "genre": "Acción",
+  "urlStream": "www.netflix.com"
+}
+
+
+###
+GET http://localhost:8080/movies/terror
+
+###
+GET http://localhost:8080/movies
+
+
+
+
+
