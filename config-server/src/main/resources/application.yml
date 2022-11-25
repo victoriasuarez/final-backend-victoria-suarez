@@ -8,6 +8,6 @@ spring:
     config:
       server:
         git:
-          uri: https://github.com/victoriasuarez/parcial-backend-victoria-suarez
+          uri: https://github.com/victoriasuarez/config-final-victoria-suarez.git
           force-pull: true
           search-paths: config-data
