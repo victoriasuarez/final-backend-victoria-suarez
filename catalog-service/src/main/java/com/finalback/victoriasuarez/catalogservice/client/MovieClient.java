@@ -28,5 +28,5 @@ public interface MovieClient {
     MovieDto getById(@PathVariable Long id);
 
     @GetMapping("/movies/{genre}")
-    List<MovieDto> getByGenre(@PathVariable(value = "genre") String genre);
+    List<MovieDto> getByGenreMovie(@PathVariable(value = "genre") String genre);
 }

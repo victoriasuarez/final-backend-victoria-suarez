@@ -26,6 +26,6 @@ public interface SerieClient {
     SerieDto getById(@PathVariable Long id);
 
     @GetMapping("/series/{genre}")
-    List<SerieDto> getByGenre(@PathVariable(value = "genre") String genre);
+    List<SerieDto> getByGenreSerie(@PathVariable(value = "genre") String genre);
 
 }
