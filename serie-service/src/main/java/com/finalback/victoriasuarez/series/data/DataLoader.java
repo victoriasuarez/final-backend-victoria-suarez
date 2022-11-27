@@ -1,6 +1,7 @@
 package com.finalback.victoriasuarez.series.data;
 
 import com.finalback.victoriasuarez.series.model.Serie;
+import com.finalback.victoriasuarez.series.model.Serie.*;
 import com.finalback.victoriasuarez.series.repository.SerieRepository;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -18,7 +19,10 @@ public class DataLoader implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        repository.save(new Serie(1L,"La casa de papel","Action"));
-        repository.save(new Serie(2L, "High School Musical: la serie", "Romance"));
+//        repository.save(new Serie(1L,"La casa de papel","Action", new Serie.SeasonDto()));
+//        repository.save(new Serie(2L, "High School Musical: la serie", "Romance"));
+
+
+        repository.save(new Serie(1L,"La casa de papel","Action", new SeasonDto(1L, 2, new ChaptersDto(1L, "Probando", 2,"wwww.netflix.com"))));
     }
 }

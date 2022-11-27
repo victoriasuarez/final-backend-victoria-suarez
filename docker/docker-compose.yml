@@ -1,7 +1,31 @@
 version: '3.3'
 services:
+  catalog-service:
+    build: final-backend-victoria-suarez/catalog-service
+    mem_limit: 512m
+    ports:
+      - "8080:8080"
+
+  movie-service:
+    build: final-backend-victoria-suarez/movie-service
+    mem_limit: 512m
+    ports:
+      - "8080:8080"
+
+  serie-service:
+    build: final-backend-victoria-suarez/serie-service
+    mem_limit: 512m
+    ports:
+      - "8080:8080"
+
+  eureka-server:
+    build: spring-cloud/eureka-server
+    mem_limit: 512m
+    ports:
+      - "8761:8761"
+
   mysql: #Config. Base de datos
-    image: mysql:5.7
+    image: mysql
     restart: always
     environment:
       MYSQL_DATABASE: 'digitalhouse-dev'
@@ -15,4 +39,16 @@ services:
       # Opens port 3306 on the container
       - '3306'
       # Where our data will be persisted
-   
+
+  mongodb:
+      image: mongo
+      restart: always
+      mem_limit: 512m
+      ports:
+        - "27017:27017"
+      command: mongod
+      healthcheck:
+        test: "mongo --eval 'db.stats().ok'"
+        interval: 5s
+        timeout: 2s
+        retries: 60
