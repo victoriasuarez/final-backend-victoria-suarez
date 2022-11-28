@@ -19,12 +19,5 @@ public class LoadBalancerConfiguration {
                 name, ServiceInstanceListSupplier.class), name
         );
 
-//        return new RoundRobinLoadBalancer(loadBalancerClientFactory.getLazyProvider(
-//                name, ServiceInstanceListSupplier.class), name
-//        );
-
-//        return new RoundRobinLoadBalancer(loadBalancerClientFactory.getLazyProvider(
-//                name, ServiceInstanceListSupplier.class), name
-//        );
     }
 }

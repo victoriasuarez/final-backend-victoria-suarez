@@ -1,19 +1,18 @@
 package com.finalback.victoriasuarez.series.model;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
-import org.springframework.data.mongodb.core.mapping.Document;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.data.mongodb.core.mapping.MongoId;
 
-@Document
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
-public class Serie {
+public class ChapterDto {
 
     @MongoId
     private Long id;
     private String name;
-    private String genre;
-    public SeasonDto seasons;
-
+    private Integer number;
+    private String urlStream;
 }

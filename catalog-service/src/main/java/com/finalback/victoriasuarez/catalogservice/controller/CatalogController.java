@@ -2,10 +2,9 @@ package com.finalback.victoriasuarez.catalogservice.controller;
 
 import com.finalback.victoriasuarez.catalogservice.client.MovieClient;
 import com.finalback.victoriasuarez.catalogservice.client.SerieClient;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
-import org.springframework.http.ResponseEntity;
+import com.finalback.victoriasuarez.catalogservice.model.Catalog;
+import com.finalback.victoriasuarez.catalogservice.model.MovieDto;
+import com.finalback.victoriasuarez.catalogservice.model.SerieDto;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,18 +22,11 @@ public class CatalogController {
         this.serviceSerie = serviceSerie;
     }
 
-    @Getter
-    @Setter
-    @AllArgsConstructor
-    class Genre {
-        List<MovieClient.MovieDto> movies;
-        List<SerieClient.SerieDto> series;
-    }
 
     @GetMapping("/{genre}")
-    public Genre getByGenre(@PathVariable String genre) {
-        List<MovieClient.MovieDto> movies = serviceMovie.getByGenreMovie(genre);
-        List<SerieClient.SerieDto> series = serviceSerie.getByGenreSerie(genre);
-        return new Genre(movies, series);
+    public Catalog getByGenre(@PathVariable String genre) {
+        List<MovieDto> movies = serviceMovie.getByGenreMovie(genre);
+        List<SerieDto> series = serviceSerie.getByGenreSerie(genre);
+        return new Catalog(movies, series);
     }
 }

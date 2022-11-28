@@ -1,31 +1,20 @@
 package com.finalback.victoriasuarez.catalogservice.client;
 
 import com.finalback.victoriasuarez.catalogservice.configuration.LoadBalancerConfiguration;
-import lombok.Getter;
-import lombok.Setter;
+
+import com.finalback.victoriasuarez.catalogservice.model.MovieDto;
 import org.springframework.cloud.loadbalancer.annotation.LoadBalancerClient;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.data.mongodb.core.mapping.MongoId;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 
 import java.util.List;
 
+
 @FeignClient(value = "movie-service")
 @LoadBalancerClient(name = "movie-service", configuration = LoadBalancerConfiguration.class)
 public interface MovieClient {
-
-    @Getter
-    @Setter
-    class MovieDto {
-
-        @MongoId
-        private Long movieId;
-        private String name;
-        private String genre;
-        private String urlStream;
-    }
 
     @GetMapping("/movies/{id}")
     MovieDto getById(@PathVariable Long id);
