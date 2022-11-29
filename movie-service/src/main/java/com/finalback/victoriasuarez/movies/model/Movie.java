@@ -17,7 +17,7 @@ public class Movie implements Serializable {
 	@Id
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
 	@Column(name = "MOVIE_ID", unique = true, nullable = false)
-	private Long movieId;
+	private Long id;
 
 	@Column(name = "MOVIE_NAME", nullable = false, length = 50)
 	private String name;

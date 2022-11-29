@@ -17,7 +17,7 @@ import org.springframework.data.mongodb.core.mapping.MongoId;
 public class MovieDto {
 
     @MongoId
-    private Long movieId;
+    private Long id;
     private String name;
     private String genre;
     private String urlStream;
