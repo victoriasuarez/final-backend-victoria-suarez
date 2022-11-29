@@ -11,8 +11,7 @@ import org.springframework.data.mongodb.core.mapping.MongoId;
 @Getter
 @Setter
 @Data
-@Document(collection = "Movie")
-@JsonPropertyOrder({"movieId", "name", "genre", "urlStream"})
+@Document
 @RequiredArgsConstructor
 public class MovieDto {
 

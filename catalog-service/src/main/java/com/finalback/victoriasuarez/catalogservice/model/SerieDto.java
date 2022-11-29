@@ -1,6 +1,5 @@
 package com.finalback.victoriasuarez.catalogservice.model;
 
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.*;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.MongoId;
@@ -33,8 +32,7 @@ class SeasonDto {
 @Getter
 @Setter
 @Data
-@Document(collection = "Serie")
-@JsonPropertyOrder({"id", "name", "genre", "seasons"})
+@Document
 @AllArgsConstructor
 public class SerieDto {
 

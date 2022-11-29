@@ -2,11 +2,8 @@ package com.finalback.victoriasuarez.catalogservice.client;
 
 import com.finalback.victoriasuarez.catalogservice.configuration.LoadBalancerConfiguration;
 import com.finalback.victoriasuarez.catalogservice.model.SerieDto;
-import lombok.*;
 import org.springframework.cloud.loadbalancer.annotation.LoadBalancerClient;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.MongoId;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
