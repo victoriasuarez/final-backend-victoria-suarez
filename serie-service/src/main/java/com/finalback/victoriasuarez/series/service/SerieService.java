@@ -35,9 +35,9 @@ public class SerieService {
         return repository.findAll();
     }
 
-    public String getMetricCatalog(Long serieId) {
+    public String getMetricCatalog(Long id) {
         String operationId = UUID.randomUUID().toString();
-        metricSerieCatalogProducer.sendMesagge(new MetricSerieCatalogProducer.MetricSerieCatalogData(serieId, operationId));
+        metricSerieCatalogProducer.sendMesagge(new MetricSerieCatalogProducer.MetricSerieCatalogData(id, operationId));
         return operationId;
     }
 

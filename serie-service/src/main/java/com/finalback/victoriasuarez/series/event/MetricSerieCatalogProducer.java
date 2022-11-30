@@ -23,7 +23,7 @@ public class MetricSerieCatalogProducer {
     }
 
     public void sendMesagge(MetricSerieCatalogData data) {
-        log.info("Sending message...");
+        log.info("Sending message desde series...");
         rabbitTemplate.convertAndSend(RabbitMQConfig.EXCHANGE_NAME, RabbitMQConfig.ROUTING_KEY_METRIC_CATALOG, data);
     }
 
@@ -32,7 +32,7 @@ public class MetricSerieCatalogProducer {
     @AllArgsConstructor
     @NoArgsConstructor
     public static class MetricSerieCatalogData {
-        private Long serieId;
+        private Long id;
         private String operationId;
     }
 

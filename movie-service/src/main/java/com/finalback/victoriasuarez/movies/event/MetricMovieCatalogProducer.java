@@ -23,7 +23,7 @@ public class MetricMovieCatalogProducer {
     }
 
     public void sendMesagge(MetricMovieCatalogData data) {
-        log.info("Sending message...");
+        log.info("Sending message desde movie...");
         rabbitTemplate.convertAndSend(RabbitMQConfig.EXCHANGE_NAME, RabbitMQConfig.ROUTING_KEY_METRIC_CATALOG, data);
     }
 
@@ -32,7 +32,7 @@ public class MetricMovieCatalogProducer {
     @AllArgsConstructor
     @NoArgsConstructor
     public static class MetricMovieCatalogData {
-        private Long movieId;
+        private Long id;
         private String operationId;
     }
 

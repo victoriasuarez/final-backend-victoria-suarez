@@ -33,9 +33,9 @@ public class MovieService {
 		return repository.findAll();
 	}
 
-	public String getMetricCatalog(Long movieId) {
+	public String getMetricCatalog(Long id) {
 		String operationId = UUID.randomUUID().toString();
-		metricMovieCatalogProducer.sendMesagge(new MetricMovieCatalogProducer.MetricMovieCatalogData(movieId, operationId));
+		metricMovieCatalogProducer.sendMesagge(new MetricMovieCatalogProducer.MetricMovieCatalogData(id, operationId));
 		return operationId;
 	}
 
