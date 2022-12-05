@@ -1,9 +1,7 @@
 package com.finalback.victoriasuarez.catalogservice.model;
 
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.Data;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.MongoId;
@@ -11,8 +9,7 @@ import org.springframework.data.mongodb.core.mapping.MongoId;
 @Getter
 @Setter
 @Data
-@Document
-@RequiredArgsConstructor
+@Document(collection = "Movies")
 public class MovieDto {
 
     @MongoId

@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/movies")
@@ -45,19 +44,20 @@ public class MovieController {
 		return ResponseEntity.ok(service.getAll());
 	}
 
-	@GetMapping("/metricCatalog/{id}")
-	@ResponseStatus(code = HttpStatus.OK)
-	public ResponseEntity<Map<String, String>> getMetrictsCatalog(@PathVariable Long id) {
-		log.info("Loading the metrics id...");
-		restTemplate.exchange("http://localhost:8080/movies/metricCatalog/" + id, HttpMethod.GET, new HttpEntity<>(id), String.class);
-		return ResponseEntity.ok(Map.of("operationId", service.getMetricCatalog(id)));
-	}
+//	@GetMapping("/metricCatalog/{id}")
+//	@ResponseStatus(code = HttpStatus.OK)
+//	public ResponseEntity<Map<String, String>> getMetrictsCatalog(@PathVariable Long id) {
+//		log.info("Loading the metrics id...");
+//		restTemplate.exchange("http://localhost:8080/movies/metricCatalog/" + id, HttpMethod.GET, new HttpEntity<>(id), String.class);
+//		return ResponseEntity.ok(Map.of("operationId", service.getMetricCatalog(id)));
+//	}
 
 	@PostMapping("/save")
 	@ResponseStatus(code = HttpStatus.CREATED)
-	public ResponseEntity<Movie> saveMovie(@RequestBody Movie movie) {
+	public ResponseEntity<String> saveMovie(@RequestBody Movie movie) {
 		log.info("Saving movie...");
-		return ResponseEntity.ok().body(service.save(movie));
+		service.save(movie);
+		return ResponseEntity.ok().body("Movie created");
 	}
 
 }

@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
 public class RabbitMQConfig {
 
     public static final String EXCHANGE_NAME = "final_backend_victoria_suarez";
-    public static final String ROUTING_KEY_METRIC_CATALOG = "metric.catalog";
+    public static final String TOPIC_SERIE = "newSerie";
 
     @Bean
     public RabbitTemplate rabbitTemplate(final ConnectionFactory connectionFactory) {

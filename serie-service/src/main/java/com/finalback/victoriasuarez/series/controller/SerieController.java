@@ -1,6 +1,5 @@
 package com.finalback.victoriasuarez.series.controller;
 
-import com.finalback.victoriasuarez.series.event.MetricSerieCatalogProducer;
 import com.finalback.victoriasuarez.series.model.Serie;
 import com.finalback.victoriasuarez.series.service.SerieService;
 import org.slf4j.Logger;
@@ -14,9 +13,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
-import java.util.Map;
-
-import static com.finalback.victoriasuarez.series.config.RabbitMQConfig.EXCHANGE_NAME;
 
 @RestController
 @RequestMapping("/series")
@@ -47,18 +43,19 @@ public class SerieController {
         return ResponseEntity.ok(service.getAll());
     }
 
-    @GetMapping("/metricCatalog/{id}")
-    @ResponseStatus(code = HttpStatus.OK)
-    ResponseEntity<Map<String, String>> getMetrictsCatalog(@PathVariable Long id) {
-        log.info("Loading the metrics id...");
-        restTemplate.exchange("http://localhost:8080/series/metricCatalog/" + id, HttpMethod.GET, new HttpEntity<>(id), String.class);
-        return ResponseEntity.ok(Map.of("operationId", service.getMetricCatalog(id)));
-    }
+//    @GetMapping("/metricCatalog/{id}")
+//    @ResponseStatus(code = HttpStatus.OK)
+//    ResponseEntity<Map<String, String>> getMetrictsCatalog(@PathVariable Long id) {
+//        log.info("Loading the metrics id...");
+//        restTemplate.exchange("http://localhost:8080/series/metricCatalog/" + id, HttpMethod.GET, new HttpEntity<>(id), String.class);
+//        return ResponseEntity.ok(Map.of("operationId", service.getMetricCatalog(id)));
+//    }
 
     @PostMapping("/save")
     @ResponseStatus(code = HttpStatus.CREATED)
-    ResponseEntity<Serie> saveSerie (@RequestBody Serie serie) {
+    public ResponseEntity<String> saveSerie (@RequestBody Serie serie) {
         log.info("Saving series...");
-        return ResponseEntity.ok().body(service.save(serie));
+        service.save(serie);
+        return ResponseEntity.ok().body("Serie created");
     }
 }

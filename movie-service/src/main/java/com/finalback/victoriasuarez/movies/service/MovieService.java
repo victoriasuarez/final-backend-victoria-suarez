@@ -23,20 +23,20 @@ public class MovieService {
 		return repository.findByGenre(genre);
 	}
 
-	public Movie save(Movie movie) {
-		Movie save = repository.save(movie);
-		metricMovieCatalogProducer.sendMesagge(new MetricMovieCatalogProducer.MetricMovieCatalogData(movie.getId(), "Movie created successfully."));
-		return save;
+	public void save(Movie movie) {
+		repository.save(movie);
+		metricMovieCatalogProducer.execute(movie);
 	}
 
 	public List<Movie> getAll() {
 		return repository.findAll();
 	}
 
-	public String getMetricCatalog(Long id) {
-		String operationId = UUID.randomUUID().toString();
-		metricMovieCatalogProducer.sendMesagge(new MetricMovieCatalogProducer.MetricMovieCatalogData(id, operationId));
-		return operationId;
-	}
+	// NO SÉ
+//	public String getMetricCatalog(Long id) {
+//		String operationId = UUID.randomUUID().toString();
+//		metricMovieCatalogProducer.sendMesagge(new MetricMovieCatalogProducer.MetricMovieCatalogData(id, operationId));
+//		return operationId;
+//	}
 
 }

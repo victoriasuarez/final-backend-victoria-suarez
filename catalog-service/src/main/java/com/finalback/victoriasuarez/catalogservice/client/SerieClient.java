@@ -14,6 +14,9 @@ import java.util.List;
 @LoadBalancerClient(name = "serie-service", configuration = LoadBalancerConfiguration.class)
 public interface SerieClient {
 
+    @GetMapping("/series")
+    List<SerieDto> getAll();
+
     @GetMapping("/series/{id}")
     SerieDto getById(@PathVariable Long id);
 

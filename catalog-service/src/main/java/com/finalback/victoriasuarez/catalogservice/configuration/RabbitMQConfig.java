@@ -10,19 +10,14 @@ import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import java.util.LinkedList;
-
-
 @Configuration
 public class RabbitMQConfig {
 
     public static final String EXCHANGE_NAME = "final_backend_victoria_suarez";
-
     public static final String QUEUE_MOVIE = "movieMetricsQueue";
-
     public static final String QUEUE_SERIE = "serieMetricsQueue";
-
-    public static final String ROUTING_KEY_METRIC_CATALOG = "metric.catalog";
+    public static final String TOPIC_MOVIE = "newMovie";
+    public static final String TOPIC_SERIE = "newSerie";
 
     @Bean
     public TopicExchange appExchange() {
@@ -39,15 +34,14 @@ public class RabbitMQConfig {
         return new Queue(QUEUE_SERIE, true);
     }
 
-
     @Bean
     public Binding declareBindingMovie() {
-        return BindingBuilder.bind(movieQueue()).to(appExchange()).with(ROUTING_KEY_METRIC_CATALOG);
+        return BindingBuilder.bind(movieQueue()).to(appExchange()).with(TOPIC_MOVIE);
     }
 
     @Bean
     public Binding declareBindingSerie() {
-        return BindingBuilder.bind(serieQueue()).to(appExchange()).with(ROUTING_KEY_METRIC_CATALOG);
+        return BindingBuilder.bind(serieQueue()).to(appExchange()).with(TOPIC_SERIE);
     }
 
     @Bean

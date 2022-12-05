@@ -15,24 +15,6 @@ import java.util.Map;
 
 @RestController
 public class UserController {
-//
-//    @Autowired
-//    private RestTemplate restTemplate;
-
-    //EJEMPLOO
-//	@PostMapping("/{idOrigen}/transferir/{idDestino}")
-//	public ResponseEntity<String> transferirMonto(@PathVariable("idOrigen") Long idCuentaOrigen
-//			, @PathVariable("idDestino") Long idCuentaDestino, @RequestBody Double monto){
-//
-//		log.info("Transfiriendo : " + monto + ", cuenta origen : " + idCuentaOrigen
-//				+ ", cuenta destino :" + idCuentaDestino);
-//
-//
-//		restTemplate.exchange("http://localhost:9092/limite/validar/" + idCuentaOrigen , HttpMethod.POST,
-//				new HttpEntity<Double>(monto) , String.class);
-//
-//		return ResponseEntity.ok("TransferenciaRealizada");
-//	}
 
     @GetMapping("/user/login")
     public Map<String, Object> login(@RequestHeader HttpHeaders headers,@AuthenticationPrincipal OAuth2User principal) {

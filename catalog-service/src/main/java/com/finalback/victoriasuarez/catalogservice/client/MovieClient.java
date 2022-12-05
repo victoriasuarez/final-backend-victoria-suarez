@@ -16,6 +16,9 @@ import java.util.List;
 @LoadBalancerClient(name = "movie-service", configuration = LoadBalancerConfiguration.class)
 public interface MovieClient {
 
+    @GetMapping("/movies")
+    List<MovieDto> getAll();
+
     @GetMapping("/movies/{id}")
     MovieDto getById(@PathVariable Long id);
 

@@ -1,6 +1,7 @@
 package com.finalback.victoriasuarez.series.event;
 
 import com.finalback.victoriasuarez.series.config.RabbitMQConfig;
+import com.finalback.victoriasuarez.series.model.Serie;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,6 +9,7 @@ import lombok.Setter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -22,9 +24,11 @@ public class MetricSerieCatalogProducer {
         this.rabbitTemplate = rabbitTemplate;
     }
 
-    public void sendMesagge(MetricSerieCatalogData data) {
+    public void execute(Serie newSerie) {
         log.info("Sending message desde series...");
-        rabbitTemplate.convertAndSend(RabbitMQConfig.EXCHANGE_NAME, RabbitMQConfig.ROUTING_KEY_METRIC_CATALOG, data);
+        MetricSerieCatalogProducer.MetricSerieCatalogData data = new MetricSerieCatalogProducer.MetricSerieCatalogData();
+        BeanUtils.copyProperties(newSerie, data.getClass());
+        rabbitTemplate.convertAndSend(RabbitMQConfig.EXCHANGE_NAME, RabbitMQConfig.TOPIC_SERIE, data);
     }
 
     @Getter
@@ -33,7 +37,32 @@ public class MetricSerieCatalogProducer {
     @NoArgsConstructor
     public static class MetricSerieCatalogData {
         private Long id;
-        private String operationId;
+        private String name;
+        private String genre;
+        public SeasonDto seasons;
+
+            @Getter
+            @Setter
+            @NoArgsConstructor
+            @AllArgsConstructor
+            class ChaptersDto {
+
+                private Long id;
+                private String name;
+                private Integer number;
+                private String urlStream;
+            }
+
+
+                @Getter
+                @Setter
+                @NoArgsConstructor
+                @AllArgsConstructor
+                class SeasonDto {
+                    private Long id;
+                    private Integer seasonNumber;
+                    public ChaptersDto chapters;
+                }
     }
 
 }
