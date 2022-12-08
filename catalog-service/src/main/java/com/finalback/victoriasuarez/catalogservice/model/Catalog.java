@@ -34,23 +34,6 @@ public class Catalog {
         private String name;
         private String genre;
         public SeasonDto seasons;
-            @Getter
-            @Setter
-            @AllArgsConstructor
-            class SeasonDto {
-                private Long id;
-                private Integer seasonNumber;
-                public ChaptersDto chapters;
-            }
-                @Getter
-                @Setter
-                @AllArgsConstructor
-                class ChaptersDto {
-                    private Long id;
-                    private String name;
-                    private Integer number;
-                    private String urlStream;
-                }
     }
 
 }

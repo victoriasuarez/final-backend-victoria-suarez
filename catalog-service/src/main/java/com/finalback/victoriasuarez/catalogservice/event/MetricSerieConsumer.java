@@ -16,13 +16,13 @@ import org.springframework.stereotype.Service;
 @Service
 public class MetricSerieConsumer {
 
-    private final SerieRepository repository;
     private final ObjectMapper objectMapper;
+    private final SerieRepository repository;
     private static final Logger log = LoggerFactory.getLogger(MetricSerieConsumer.class);
 
-    public MetricSerieConsumer(SerieRepository repository, ObjectMapper objectMapper) {
-        this.repository = repository;
+    public MetricSerieConsumer(ObjectMapper objectMapper, SerieRepository repository) {
         this.objectMapper = objectMapper;
+        this.repository = repository;
     }
 
 
@@ -50,7 +50,7 @@ public class MetricSerieConsumer {
             @Setter
             @NoArgsConstructor
             @AllArgsConstructor
-            class ChaptersDto {
+            public static class ChaptersDto {
 
                 private Long id;
                 private String name;
@@ -63,7 +63,7 @@ public class MetricSerieConsumer {
                 @Setter
                 @NoArgsConstructor
                 @AllArgsConstructor
-                class SeasonDto {
+                public static class SeasonDto {
                     private Long id;
                     private Integer seasonNumber;
                     public ChaptersDto chapters;

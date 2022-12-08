@@ -8,33 +8,18 @@ import com.finalback.victoriasuarez.catalogservice.model.SerieDto;
 import com.finalback.victoriasuarez.catalogservice.repository.MovieRepository;
 import com.finalback.victoriasuarez.catalogservice.repository.SerieRepository;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.toList;
 
 @Service
 public class CatalogService {
 
-//    private final CatalogRepository repository;
-//
-//    public CatalogService(CatalogRepository repository) {
-//        this.repository = repository;
-//    }
-//
-//    public Catalog save(Catalog catalogs) {
-//        return repository.save(catalogs);
-//    }
-
-    // Lógica nueva
-    @Autowired
     private final MovieRepository movieRepository;
-    @Autowired
     private final SerieRepository serieRepository;
-    @Autowired
     private final MovieClient movieClient;
-    @Autowired
     private final SerieClient serieClient;
 
     public CatalogService(MovieRepository movieRepository, SerieRepository serieRepository, MovieClient movieClient, SerieClient serieClient) {
@@ -51,43 +36,41 @@ public class CatalogService {
         return response;
     }
 
-    //Lógica del profesor
-
-
-    // Corregir la lógica de los FindAll
     private void findAllMoviesByGenre(String genre, Catalog response) {
-        List<MovieDto> save = movieClient.getByGenreMovie(genre).stream().collect(Collectors.toList());
+        List<MovieDto> save = movieClient.getAll().stream().filter(movie -> movie.getGenre().equals(genre)).toList();
         response.setMovies(save.stream().map(movie -> {
             Catalog.Movies movieResponse = new Catalog.Movies();
             BeanUtils.copyProperties(movie, movieResponse);
+            movieRepository.save(movieResponse);
             return movieResponse;
-        }).collect(Collectors.toList()));
+        }).collect(toList()));
     }
 
     private void findAllSeriesByGenre(String genre, Catalog response) {
-        List<SerieDto> save = serieClient.getByGenreSerie(genre).stream().collect(Collectors.toList());
+        List<SerieDto> save = serieClient.getAll().stream().filter(serie -> serie.getGenre().equals(genre)).toList();
         response.setSeries(save.stream().map(serie -> {
             Catalog.Series serieResponse = new Catalog.Series();
             BeanUtils.copyProperties(serie, serieResponse);
+            serieRepository.save(serieResponse);
             return serieResponse;
-        }).collect(Collectors.toList()));
+        }).collect(toList()));
     }
 
     public Catalog getCatalogByGenreOffline(String genre) {
         Catalog response = new Catalog();
-        List<MovieDto> saveMovie = movieRepository.getMovieByGenre(genre);
+        List<Catalog.Movies> saveMovie = movieRepository.getMovieByGenre(genre);
         response.setMovies(saveMovie.stream().map(movies -> {
             Catalog.Movies movieRsp = new Catalog.Movies();
             BeanUtils.copyProperties(movies, movieRsp);
             return movieRsp;
-        }).collect(Collectors.toList()));
+        }).collect(toList()));
 
-        List<SerieDto> saveSerie = serieRepository.getSerieByGenre(genre);
+        List<Catalog.Series> saveSerie = serieRepository.getSerieByGenre(genre);
         response.setSeries(saveSerie.stream().map(series -> {
             Catalog.Series serieRsp = new Catalog.Series();
             BeanUtils.copyProperties(series, serieRsp);
             return serieRsp;
-        }).collect(Collectors.toList()));
+        }).collect(toList()));
         return response;
     }
 }

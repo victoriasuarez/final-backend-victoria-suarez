@@ -26,7 +26,7 @@ public class MetricSerieCatalogProducer {
 
     public void execute(Serie newSerie) {
         log.info("Sending message desde series...");
-        MetricSerieCatalogProducer.MetricSerieCatalogData data = new MetricSerieCatalogProducer.MetricSerieCatalogData();
+        MetricSerieCatalogProducer.MetricSerieData data = new MetricSerieCatalogProducer.MetricSerieData();
         BeanUtils.copyProperties(newSerie, data.getClass());
         rabbitTemplate.convertAndSend(RabbitMQConfig.EXCHANGE_NAME, RabbitMQConfig.TOPIC_SERIE, data);
     }
@@ -35,7 +35,7 @@ public class MetricSerieCatalogProducer {
     @Setter
     @AllArgsConstructor
     @NoArgsConstructor
-    public static class MetricSerieCatalogData {
+    public static class MetricSerieData {
         private Long id;
         private String name;
         private String genre;
@@ -45,7 +45,7 @@ public class MetricSerieCatalogProducer {
             @Setter
             @NoArgsConstructor
             @AllArgsConstructor
-            class ChaptersDto {
+            public static class ChaptersDto {
 
                 private Long id;
                 private String name;
@@ -58,7 +58,7 @@ public class MetricSerieCatalogProducer {
                 @Setter
                 @NoArgsConstructor
                 @AllArgsConstructor
-                class SeasonDto {
+                public static class SeasonDto {
                     private Long id;
                     private Integer seasonNumber;
                     public ChaptersDto chapters;

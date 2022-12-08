@@ -26,7 +26,7 @@ public class MetricMovieCatalogProducer {
 
     public void execute(Movie newMovie) {
         log.info("Sending message desde movie...");
-        MetricMovieCatalogProducer.MetricMovieCatalogData data = new MetricMovieCatalogProducer.MetricMovieCatalogData();
+        MetricMovieCatalogProducer.MetricMovieData data = new MetricMovieCatalogProducer.MetricMovieData();
         BeanUtils.copyProperties(newMovie, data.getClass());
         rabbitTemplate.convertAndSend(RabbitMQConfig.EXCHANGE_NAME, RabbitMQConfig.TOPIC_MOVIE, data);
     }
@@ -36,7 +36,7 @@ public class MetricMovieCatalogProducer {
     @Setter
     @AllArgsConstructor
     @NoArgsConstructor
-    public static class MetricMovieCatalogData {
+    public static class MetricMovieData {
         private Long id;
         private String name;
         private String genre;
