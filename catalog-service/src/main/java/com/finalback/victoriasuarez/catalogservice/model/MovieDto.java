@@ -6,11 +6,13 @@ import lombok.Setter;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.MongoId;
 
+import java.io.Serializable;
+
 @Getter
 @Setter
 @Data
 @Document(collection = "Movies")
-public class MovieDto {
+public class MovieDto implements Serializable {
 
     @MongoId
     private Long id;

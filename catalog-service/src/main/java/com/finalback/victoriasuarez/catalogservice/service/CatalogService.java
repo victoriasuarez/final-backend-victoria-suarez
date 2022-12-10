@@ -39,7 +39,7 @@ public class CatalogService {
     private void findAllMoviesByGenre(String genre, Catalog response) {
         List<MovieDto> save = movieClient.getAll().stream().filter(movie -> movie.getGenre().equals(genre)).toList();
         response.setMovies(save.stream().map(movie -> {
-            Catalog.Movies movieResponse = new Catalog.Movies();
+            MovieDto movieResponse = new MovieDto();
             BeanUtils.copyProperties(movie, movieResponse);
             movieRepository.save(movieResponse);
             return movieResponse;
@@ -49,7 +49,7 @@ public class CatalogService {
     private void findAllSeriesByGenre(String genre, Catalog response) {
         List<SerieDto> save = serieClient.getAll().stream().filter(serie -> serie.getGenre().equals(genre)).toList();
         response.setSeries(save.stream().map(serie -> {
-            Catalog.Series serieResponse = new Catalog.Series();
+            SerieDto serieResponse = new SerieDto();
             BeanUtils.copyProperties(serie, serieResponse);
             serieRepository.save(serieResponse);
             return serieResponse;
@@ -58,16 +58,16 @@ public class CatalogService {
 
     public Catalog getCatalogByGenreOffline(String genre) {
         Catalog response = new Catalog();
-        List<Catalog.Movies> saveMovie = movieRepository.getMovieByGenre(genre);
+        List<MovieDto> saveMovie = movieRepository.getMovieByGenre(genre);
         response.setMovies(saveMovie.stream().map(movies -> {
-            Catalog.Movies movieRsp = new Catalog.Movies();
+            MovieDto movieRsp = new MovieDto();
             BeanUtils.copyProperties(movies, movieRsp);
             return movieRsp;
         }).collect(toList()));
 
-        List<Catalog.Series> saveSerie = serieRepository.getSerieByGenre(genre);
+        List<SerieDto> saveSerie = serieRepository.getSerieByGenre(genre);
         response.setSeries(saveSerie.stream().map(series -> {
-            Catalog.Series serieRsp = new Catalog.Series();
+            SerieDto serieRsp = new SerieDto();
             BeanUtils.copyProperties(series, serieRsp);
             return serieRsp;
         }).collect(toList()));

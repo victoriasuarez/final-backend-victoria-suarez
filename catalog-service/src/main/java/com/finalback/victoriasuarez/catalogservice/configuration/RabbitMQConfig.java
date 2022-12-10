@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class RabbitMQConfig {
 
-    public static final String EXCHANGE_NAME = "final_backend_victoria_suarez";
+    public static final String EXCHANGE_NAME = "final.backend.victoria.suarez";
     public static final String QUEUE_MOVIE = "movieMetricsQueue";
     public static final String QUEUE_SERIE = "serieMetricsQueue";
     public static final String TOPIC_MOVIE = "newMovie";
@@ -26,12 +26,12 @@ public class RabbitMQConfig {
 
     @Bean
     public Queue movieQueue() {
-        return new Queue(QUEUE_MOVIE, true);
+        return new Queue(QUEUE_MOVIE);
     }
 
     @Bean
     public Queue serieQueue() {
-        return new Queue(QUEUE_SERIE, true);
+        return new Queue(QUEUE_SERIE);
     }
 
     @Bean
@@ -45,7 +45,7 @@ public class RabbitMQConfig {
     }
 
     @Bean
-    public RabbitTemplate rabbitTemplate(final ConnectionFactory connectionFactory) {
+    public RabbitTemplate rabbitTemplate(ConnectionFactory connectionFactory) {
         final var rabbitTemplate = new RabbitTemplate(connectionFactory);
         rabbitTemplate.setMessageConverter(producerJackson2MessageConverter());
         return rabbitTemplate;

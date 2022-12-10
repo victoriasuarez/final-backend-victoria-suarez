@@ -11,29 +11,29 @@ import java.util.List;
 @AllArgsConstructor
 public class Catalog {
 
-    List<Catalog.Movies> movies = new ArrayList<>();
-    List<Catalog.Series> series = new ArrayList<>();
+    private List<MovieDto> movies = new ArrayList<>();
+    private List<SerieDto> series = new ArrayList<>();
 
-    @Getter
-    @Setter
-    @NoArgsConstructor
-    @AllArgsConstructor
-    public static class Movies {
-        private Long id;
-        private String name;
-        private String genre;
-        private String urlStream;
-    }
-
-    @Getter
-    @Setter
-    @NoArgsConstructor
-    @AllArgsConstructor
-    public static class Series {
-        private Long id;
-        private String name;
-        private String genre;
-        public SeasonDto seasons;
-    }
+//    @Getter
+//    @Setter
+//    @NoArgsConstructor
+//    @AllArgsConstructor
+//    public static class Movies {
+//        private Long id;
+//        private String name;
+//        private String genre;
+//        private String urlStream;
+//    }
+//
+//    @Getter
+//    @Setter
+//    @NoArgsConstructor
+//    @AllArgsConstructor
+//    public static class Series {
+//        private Long id;
+//        private String name;
+//        private String genre;
+//        public SeasonDto seasons;
+//    }
 
 }

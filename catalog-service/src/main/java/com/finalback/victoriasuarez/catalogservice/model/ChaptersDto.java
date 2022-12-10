@@ -5,10 +5,12 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.mongodb.core.mapping.MongoId;
 
+import java.io.Serializable;
+
 @Getter
 @Setter
 @AllArgsConstructor
-public class ChaptersDto {
+public class ChaptersDto implements Serializable {
 
     @MongoId
     private Long id;

@@ -6,16 +6,18 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 
+import java.io.Serializable;
+
 @Component
+@Slf4j
 public class MetricMovieCatalogProducer {
 
-    public static final Logger log = LoggerFactory.getLogger(MetricMovieCatalogProducer.class);
+//    public static final Logger log = LoggerFactory.getLogger(MetricMovieCatalogProducer.class);
 
     private final RabbitTemplate rabbitTemplate;
 
@@ -25,23 +27,33 @@ public class MetricMovieCatalogProducer {
     }
 
     public void execute(Movie newMovie) {
-        log.info("Sending message desde movie...");
-        MetricMovieCatalogProducer.MetricMovieData data = new MetricMovieCatalogProducer.MetricMovieData();
-        BeanUtils.copyProperties(newMovie, data.getClass());
+        MetricMovieCatalogProducer.Data data = new MetricMovieCatalogProducer.Data();
+        BeanUtils.copyProperties(newMovie, data.getMovies());
         rabbitTemplate.convertAndSend(RabbitMQConfig.EXCHANGE_NAME, RabbitMQConfig.TOPIC_MOVIE, data);
     }
+
+//    public void sendMessage(MetricMovieData dataMovie) {
+//        log.info("Sending message desde movie...");
+//        rabbitTemplate.convertAndSend(RabbitMQConfig.EXCHANGE_NAME, RabbitMQConfig.TOPIC_MOVIE, dataMovie);
+//    }
 
     // Corregir
     @Getter
     @Setter
     @AllArgsConstructor
     @NoArgsConstructor
-    public static class MetricMovieData {
-        private Long id;
-        private String name;
-        private String genre;
-        private String urlStream;
+    public static class Data implements Serializable {
+        private Data.MetricMovieData movies = new MetricMovieData();
+        @Getter
+        @Setter
+        @AllArgsConstructor
+        @NoArgsConstructor
+        public static class MetricMovieData {
+            private Long id;
+            private String name;
+            private String genre;
+            private String urlStream;
+        }
     }
-
 
 }

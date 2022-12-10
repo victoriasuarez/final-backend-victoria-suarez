@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/series")
@@ -48,7 +49,7 @@ public class SerieController {
 //    ResponseEntity<Map<String, String>> getMetrictsCatalog(@PathVariable Long id) {
 //        log.info("Loading the metrics id...");
 //        restTemplate.exchange("http://localhost:8080/series/metricCatalog/" + id, HttpMethod.GET, new HttpEntity<>(id), String.class);
-//        return ResponseEntity.ok(Map.of("operationId", service.getMetricCatalog(id)));
+//        return ResponseEntity.ok(Map.of("idSerie", service.getMetricCatalog(id)));
 //    }
 
     @PostMapping("/save")

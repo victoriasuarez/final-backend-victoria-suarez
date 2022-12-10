@@ -1,5 +1,6 @@
 package com.finalback.victoriasuarez.series.config;
 
+import org.springframework.amqp.core.TopicExchange;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
@@ -9,11 +10,15 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class RabbitMQConfig {
 
-    public static final String EXCHANGE_NAME = "final_backend_victoria_suarez";
+    public static final String EXCHANGE_NAME = "final.backend.victoria.suarez";
     public static final String TOPIC_SERIE = "newSerie";
 
     @Bean
-    public RabbitTemplate rabbitTemplate(final ConnectionFactory connectionFactory) {
+    public TopicExchange appExchange() {
+        return new TopicExchange(EXCHANGE_NAME);
+    }
+    @Bean
+    public RabbitTemplate rabbitTemplate(ConnectionFactory connectionFactory) {
         final var rabbitTemplate = new RabbitTemplate(connectionFactory);
         rabbitTemplate.setMessageConverter(producerJackson2MessageConverter());
         return rabbitTemplate;

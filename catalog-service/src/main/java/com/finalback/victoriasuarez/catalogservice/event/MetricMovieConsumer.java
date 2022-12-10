@@ -1,6 +1,5 @@
 package com.finalback.victoriasuarez.catalogservice.event;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.finalback.victoriasuarez.catalogservice.configuration.RabbitMQConfig;
 import com.finalback.victoriasuarez.catalogservice.model.MovieDto;
 import com.finalback.victoriasuarez.catalogservice.repository.MovieRepository;
@@ -11,40 +10,53 @@ import lombok.Setter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
+import java.io.Serializable;
 
 
 @Service
 public class MetricMovieConsumer {
 
-    private final ObjectMapper objectMapper;
     private final MovieRepository repository;
     private static final Logger log = LoggerFactory.getLogger(MetricMovieConsumer.class);
 
-    public MetricMovieConsumer(ObjectMapper objectMapper, MovieRepository repository) {
-        this.objectMapper = objectMapper;
+    public MetricMovieConsumer(MovieRepository repository) {
         this.repository = repository;
     }
 
     @RabbitListener(queues = RabbitMQConfig.QUEUE_MOVIE)
-    public void execute(MetricMovieData data) {
-        log.info("Music received successfully");
+    public void execute(MetricMovieConsumer.Data data) {
+//        log.info("new Movie");
         MovieDto movieDto = new MovieDto();
-        objectMapper.convertValue(movieDto, MetricMovieData.class);
-        repository.deleteById(data.getId());
+        BeanUtils.copyProperties(data.getMovieData(), movieDto);
+        repository.deleteById(data.movieData.getId());
         repository.save(movieDto);
     }
+
+//    @RabbitListener(queues = RabbitMQConfig.QUEUE_MOVIE)
+//    public void receivedMessage(final MetricMovieData message) {
+//        log.info("Received message as a generic AMQP 'Message' wrapper: {}", message.id);
+//    }
+
 
     @Getter
     @Setter
     @NoArgsConstructor
     @AllArgsConstructor
-    public static class MetricMovieData {
-        private Long id;
-        private String name;
-        private String genre;
-        private String urlStream;
-    }
+    public static class Data implements Serializable {
 
+        private MetricMovieData movieData = new MetricMovieData();
+        @Getter
+        @Setter
+        @NoArgsConstructor
+        @AllArgsConstructor
+        public static class MetricMovieData {
+            private Long id;
+            private String name;
+            private String genre;
+            private String urlStream;
+        }
+    }
 }

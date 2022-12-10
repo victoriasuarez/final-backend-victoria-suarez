@@ -34,9 +34,10 @@ public class MovieService {
 
 	// NO SÉ
 //	public String getMetricCatalog(Long id) {
-//		String operationId = UUID.randomUUID().toString();
-//		metricMovieCatalogProducer.sendMesagge(new MetricMovieCatalogProducer.MetricMovieCatalogData(id, operationId));
-//		return operationId;
+//		MetricMovieCatalogProducer.MetricMovieData movie = new MetricMovieCatalogProducer.MetricMovieData();
+//		String idString = id.toString();
+//		metricMovieCatalogProducer.sendMessage(new MetricMovieCatalogProducer.MetricMovieData(movie.getId(),movie.getName(),movie.getGenre(),movie.getUrlStream()));
+//		return idString;
 //	}
 
 }
