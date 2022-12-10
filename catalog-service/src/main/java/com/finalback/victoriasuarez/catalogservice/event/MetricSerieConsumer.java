@@ -29,11 +29,11 @@ public class MetricSerieConsumer {
 
     @RabbitListener(queues = RabbitMQConfig.QUEUE_SERIE)
     public void execute(MetricSerieConsumer.Data data) {
-//        log.info("new Serie");
-        SerieDto serieDto = new SerieDto();
-        BeanUtils.copyProperties(data.getSerieData(), serieDto);
-        repository.deleteById(data.serieData.getId());
-        repository.save(serieDto);
+        log.info("new Serie");
+//        SerieDto serieDto = new SerieDto();
+//        BeanUtils.copyProperties(data.getSerieData(), serieDto);
+//        repository.deleteById(data.serieData.getId());
+//        repository.save(serieDto);
     }
 
 //    @RabbitListener(queues = RabbitMQConfig.QUEUE_SERIE)

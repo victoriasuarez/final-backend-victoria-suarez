@@ -18,7 +18,7 @@ public class Catalog {
 //    @Setter
 //    @NoArgsConstructor
 //    @AllArgsConstructor
-//    public static class Movies {
+//    public static class MovieData {
 //        private Long id;
 //        private String name;
 //        private String genre;
@@ -29,7 +29,7 @@ public class Catalog {
 //    @Setter
 //    @NoArgsConstructor
 //    @AllArgsConstructor
-//    public static class Series {
+//    public static class MovieData {
 //        private Long id;
 //        private String name;
 //        private String genre;

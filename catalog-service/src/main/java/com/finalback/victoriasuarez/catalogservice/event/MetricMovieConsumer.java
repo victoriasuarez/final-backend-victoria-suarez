@@ -28,11 +28,11 @@ public class MetricMovieConsumer {
 
     @RabbitListener(queues = RabbitMQConfig.QUEUE_MOVIE)
     public void execute(MetricMovieConsumer.Data data) {
-//        log.info("new Movie");
-        MovieDto movieDto = new MovieDto();
-        BeanUtils.copyProperties(data.getMovieData(), movieDto);
-        repository.deleteById(data.movieData.getId());
-        repository.save(movieDto);
+        log.info("new Movie");
+//        MovieDto movieDto = new MovieDto();
+//        BeanUtils.copyProperties(data.getMovieData(), movieDto);
+//        repository.deleteById(data.movieData.getId());
+//        repository.save(movieDto);
     }
 
 //    @RabbitListener(queues = RabbitMQConfig.QUEUE_MOVIE)
