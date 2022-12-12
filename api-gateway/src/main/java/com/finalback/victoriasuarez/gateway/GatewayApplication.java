@@ -1,16 +1,15 @@
-package com.finalback.victoriasuarez.apigateway;
+package com.finalback.victoriasuarez.gateway;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
-
-
 @SpringBootApplication
 @EnableDiscoveryClient
-public class MsGatewayApplication {
+public class GatewayApplication {
+
     public static void main(String[] args) {
-        SpringApplication.run(MsGatewayApplication.class, args);
+        SpringApplication.run(GatewayApplication.class, args);
     }
 
 }

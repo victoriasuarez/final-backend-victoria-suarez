@@ -22,9 +22,6 @@ public class MovieController {
 
 	public static final Logger log = LoggerFactory.getLogger(MovieController.class);
 
-	@Autowired
-	private RestTemplate restTemplate;
-
 	public MovieController(MovieService service) {
 		this.service = service;
 	}
@@ -33,7 +30,6 @@ public class MovieController {
 	@ResponseStatus(code = HttpStatus.OK)
 	ResponseEntity<List<Movie>> getMovieByGenre(@PathVariable String genre) {
 		log.info("Loading movies by genre...");
-		restTemplate.exchange("http://localhost:8080/movies/" + genre, HttpMethod.GET, new HttpEntity<>(genre), String.class);
 		return ResponseEntity.ok(service.findByGenre(genre));
 	}
 

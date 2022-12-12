@@ -25,14 +25,10 @@ public class SerieController {
         this.service = service;
     }
 
-    @Autowired
-    private RestTemplate restTemplate;
-
     @GetMapping("/{genre}")
     @ResponseStatus(code = HttpStatus.OK)
     ResponseEntity<List<Serie>> getSeriesByGenre(@PathVariable String genre){
         log.info("Loading series by genre...");
-        restTemplate.exchange("http://localhost:8080/series/" + genre, HttpMethod.GET, new HttpEntity<>(genre), String.class);
         return ResponseEntity.ok(service.findByGenre(genre));
     }
 
