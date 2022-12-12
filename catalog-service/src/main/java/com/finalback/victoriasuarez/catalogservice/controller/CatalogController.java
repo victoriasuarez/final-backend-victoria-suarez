@@ -20,17 +20,6 @@ public class CatalogController {
         this.service = service;
     }
 
-//    @GetMapping("/{genre}")
-//    @ResponseStatus(code = HttpStatus.OK)
-//    public Catalog getByGenre(@PathVariable String genre) {
-//        log.info("Loading movies and series by genre...");
-//        List<MovieDto> movies = serviceMovie.getByGenreMovie(genre);
-//        List<SerieDto> series = serviceSerie.getByGenreSerie(genre);
-//        return service.save(new Catalog(movies,series));
-//    }
-
-    //Lógica profesor
-
     @GetMapping("/online/{genre}")
     @ResponseStatus(code = HttpStatus.OK)
     public ResponseEntity<Catalog> getCatalogByGenreOnline(@PathVariable String genre) {

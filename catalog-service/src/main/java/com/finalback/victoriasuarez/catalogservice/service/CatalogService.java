@@ -38,6 +38,23 @@ public class CatalogService {
         return response;
     }
 
+    // Esquema de resiliencia -> Se eligió colocar ambos microservicios en el esquema ya que son los dos igual de importantes.
+    // El sistema central tiene como fin consumir los dos microservicios.
+    // Para ambos casos, eligió para el Circuit Breaker:
+    //   - Que se active mediante un contador de tiempo.
+    //   - Con una tolerancia de 10 segundos, si no pasa a estado OPEN.
+    //   - Con un porcentaje de llamadas fallidas de un 50%.
+    //   - Con 3 llamadas de tolerancia en HALF-OPEN.
+    //   - Con 50 segundos de espera en el estado OPEN para pasar a HALF-OPEN.
+
+    // Para ambos casos, eligió para el Retry:
+    //   - 3 reintentos como máximo para tomar como fallida la solicitud enviada
+    //   - 10 segundos para realizar un nuevo reintento
+    //   - Lista que desencadenan los reintentos
+
+    // - Se definió que, en caso de fallback, se invoca el método Offline, el cuál posee los datos de los microservicios almacenados
+    // en su propia base de datos.
+
     @Retry(name = "retryMovies")
     @CircuitBreaker(name = "MovieClient", fallbackMethod = "findAllMoviesFallBack")
     private void findAllMoviesByGenre(String genre, Catalog response) {
@@ -56,7 +73,6 @@ public class CatalogService {
             BeanUtils.copyProperties(movies, movieRsp);
             return movieRsp;
         }).collect(toList()));
-        System.out.println("Hubo un error");
     }
 
     @Retry(name = "retrySeries")
@@ -77,7 +93,6 @@ public class CatalogService {
             BeanUtils.copyProperties(series, serieRsp);
             return serieRsp;
         }).collect(toList()));
-        System.out.println("Hubo un error");
     }
 
     public Catalog getCatalogByGenreOffline(String genre) {
