@@ -14,8 +14,8 @@ import org.springframework.context.annotation.Configuration;
 public class RabbitMQConfig {
 
     public static final String EXCHANGE_NAME = "final.backend.victoria.suarez";
-    public static final String QUEUE_MOVIE = "movieMetricsQueue";
-    public static final String QUEUE_SERIE = "serieMetricsQueue";
+    public static final String QUEUE_MOVIE = "newMovieQueue";
+    public static final String QUEUE_SERIE = "newSerieQueue";
     public static final String TOPIC_MOVIE = "newMovie";
     public static final String TOPIC_SERIE = "newSerie";
 

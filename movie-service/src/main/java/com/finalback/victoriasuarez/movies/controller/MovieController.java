@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/movies")
@@ -44,14 +43,6 @@ public class MovieController {
 		log.info("Loading all movies...");
 		return ResponseEntity.ok(service.getAll());
 	}
-
-//	@GetMapping("/metricCatalog/{id}")
-//	@ResponseStatus(code = HttpStatus.OK)
-//	public ResponseEntity<Map<String, String>> getMetrictsCatalog(@PathVariable Long id) {
-//		log.info("Loading the metrics id...");
-//		restTemplate.exchange("http://localhost:8080/movies/metricCatalog/" + id, HttpMethod.GET, new HttpEntity<>(id), String.class);
-//		return ResponseEntity.ok(Map.of("idMovie", service.getMetricCatalog(id)));
-//	}
 
 	@PostMapping("/save")
 	@ResponseStatus(code = HttpStatus.CREATED)
